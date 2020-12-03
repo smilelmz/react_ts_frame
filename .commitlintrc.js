@@ -19,7 +19,7 @@ module.exports = {
        * test : 增加测试
        * anno: 增加注释
        */
-      ['build', 'ci', 'chore', 'docs', 'feat', 'fix', 'perf', 'refactor', 'revert', 'style', 'test', 'anno']
+      ['build', 'ci', 'chore', 'docs', 'feat', 'fix', 'perf', 'refactor', 'revert', 'style', 'test', 'anno', 'config']
     ]
   }
 }

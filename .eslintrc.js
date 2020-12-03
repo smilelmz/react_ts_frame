@@ -10,7 +10,6 @@ module.exports = {
   },
   extends: [
     'airbnb',
-    // hooks 检查
     'airbnb/hooks',
     'plugin:react/recommended',
     'plugin:unicorn/recommended',
@@ -34,7 +33,8 @@ module.exports = {
     // 根据扩展名优化文件查找顺序
     'import/resolver': {
       node: {
-        extensions: ['.tsx', '.ts', '.js', '.json']
+        extensions: ['.tsx', '.ts', '.js', '.json'],
+        moduleDirectory: ['node_modules', 'src/']
       },
       typescript: {}
     }
@@ -87,6 +87,8 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': OFF,
     '@typescript-eslint/explicit-module-boundary-types': OFF,
     '@typescript-eslint/no-explicit-any': OFF,
+    '@typescript-eslint/no-use-before-define': OFF,
+    '@typescript-eslint/ban-ts-ignore': OFF,
 
     'react/jsx-filename-extension': [ERROR, { extensions: ['.tsx', 'ts', '.jsx', 'js'] }],
     'react/jsx-indent-props': [ERROR, 2],
@@ -96,6 +98,7 @@ module.exports = {
     'react/state-in-constructor': OFF,
     'react/jsx-props-no-spreading': OFF,
     'react/prop-types': OFF,
+    'react/jsx-no-undef': OFF,
 
     'jsx-a11y/click-events-have-key-events': OFF,
     'jsx-a11y/no-noninteractive-element-interactions': OFF,
@@ -110,6 +113,7 @@ module.exports = {
     'no-console': OFF,
     'class-methods-use-this': ERROR,
     'jsx-quotes': [ERROR, 'prefer-single'],
-    'global-require': OFF
+    'global-require': OFF,
+    'no-use-before-define': OFF
   }
 }
