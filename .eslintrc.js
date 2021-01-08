@@ -55,21 +55,22 @@ module.exports = {
     'import/no-unresolved': ERROR,
     'unicorn/better-regex': ERROR,
     'unicorn/prevent-abbreviations': OFF,
-    'unicorn/filename-case': [
-      ERROR,
-      {
-        cases: {
-          // 中划线
-          kebabCase: true,
-          // 小驼峰
-          camelCase: true,
-          // 下划线
-          snakeCase: false,
-          // 大驼峰
-          pascalCase: true
-        }
-      }
-    ],
+    'unicorn/filename-case': OFF,
+    // 'unicorn/filename-case': [
+    //   ERROR,
+    //   {
+    //     cases: {
+    //       // 中划线
+    //       kebabCase: true,
+    //       // 小驼峰
+    //       camelCase: true,
+    //       // 下划线
+    //       snakeCase: false,
+    //       // 大驼峰
+    //       pascalCase: true
+    //     }
+    //   }
+    // ],
     'unicorn/no-array-instanceof': WARN,
     'unicorn/no-for-loop': WARN, // 使用 for of 和 .entries 代替传统的 for 循环
     'unicorn/prefer-add-event-listener': [
