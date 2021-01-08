@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const WebpackBar = require('webpackbar')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { ROOT_PATH, SRC_PATH, isDev } = require('./constants')
 
 const getHtmlPlugin = () => {
@@ -23,7 +24,7 @@ const getHtmlPlugin = () => {
 }
 
 const getCssLoaders = importLoaders => [
-  'style-loader',
+  isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
   {
     loader: 'css-loader',
     options: {
@@ -53,7 +54,43 @@ const getCssLoaders = importLoaders => [
   }
 ]
 
-module.exports = {
+const getPlugins = () => {
+  const plugins = [getHtmlPlugin()]
+  if (!isDev) {
+    plugins.push(
+      new MiniCssExtractPlugin({
+        filename: 'css/[name].[contenthash:8].css',
+        chunkFilename: 'css/[name].[contenthash:8].css',
+        ignoreOrder: false
+      })
+    )
+  }
+  plugins.push(
+    new CopyPlugin({
+      // 拷贝静态资源
+      patterns: [
+        {
+          context: `${ROOT_PATH}/public`,
+          from: '*',
+          to: `${ROOT_PATH}/dist`,
+          toType: 'dir'
+        }
+      ]
+    }),
+    new WebpackBar({
+      name: isDev ? '正在启动' : '正在打包',
+      color: '#008B00'
+    }),
+    new ForkTsCheckerWebpackPlugin({
+      typescript: {
+        configFile: `${ROOT_PATH}/tsconfig.json`
+      }
+    })
+  )
+  return plugins
+}
+
+const CommonConfig = {
   entry: {
     app: `${SRC_PATH}/index.tsx`
   },
@@ -130,31 +167,11 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    getHtmlPlugin(),
-    new CopyPlugin({
-      // 拷贝静态资源
-      patterns: [
-        {
-          context: `${ROOT_PATH}/public`,
-          from: '*',
-          to: `${ROOT_PATH}/dist`,
-          toType: 'dir'
-        }
-      ]
-    }),
-    new WebpackBar({
-      name: isDev ? '正在启动' : '正在打包',
-      color: '#008B00'
-    }),
-    new ForkTsCheckerWebpackPlugin({
-      typescript: {
-        configFile: `${ROOT_PATH}/tsconfig.json`
-      }
-    })
-  ],
+  plugins: getPlugins(),
   externals: {
     react: 'React',
     'react-dom': 'ReactDOM'
   }
 }
+
+module.exports = CommonConfig

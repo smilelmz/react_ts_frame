@@ -11,7 +11,7 @@ const PROJECT_NAME = path.parse(ROOT_PATH).name
 const IS_OPEN_HARD_SOURCE = true
 
 // 是否开启 bundle 包分析
-const SHOULD_OPEN_ANALYZER = true
+const SHOULD_OPEN_ANALYZER = process.env.ANALYZER === 1
 
 module.exports = {
   isDev,

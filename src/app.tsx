@@ -13,7 +13,7 @@ function App() {
         <One a={1} b={2} />
         {showTwo && <Two a={3} b={4} />}
         <button type='button' onClick={() => setShowTwo(true)}>
-          显示Two啊啊啊
+          显示Two啊啊啊fff
         </button>
       </Suspense>
     </div>
